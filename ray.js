@@ -69,6 +69,7 @@ class Ray{
             offset=new Vec2(dir.x*r,dir.y*r);
             center.add(offset);
         }
+        this.end=null;
     }
 }
 
