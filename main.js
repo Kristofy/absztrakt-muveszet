@@ -1,9 +1,10 @@
 
-let vonal;
+let vonalak=[];
+let angles=[];
 
 let obstacles = [];
 let player;
-let angle=0;
+//let angle=0;
 let manual=document.querySelector("#manual");
 let circles=document.querySelector("#circles");
 let intersectoins=document.querySelector("#intersectoins");
@@ -32,7 +33,10 @@ function setup(){
     let C = createCanvas(800,400);
     C.parent("#parent");
     player=new Player(width/2,height/2);
-    vonal = new Ray(player);
+    for(let i = 0;i<TWO_PI;i+=0.005){
+        vonalak.push(new Ray(player));
+        
+    }
     colorOfPoints=random(100);
     for(let i=0;i<5;i++) {
         obstacles.push(new Ellipse(new Vec2(random(width),random(height)),random(15,60)));
@@ -55,7 +59,9 @@ function draw(){
         o.render();
     }
 
-    vonal.render()
+    for(let v of vonalak){
+        v.render()
+    }
     player.render();;
     
     if(intersectoins.checked){
@@ -71,15 +77,17 @@ function draw(){
     }
 
     if(manual.checked){
-        vonal.update(angle);
+        for(let i = 0;i<TWO_PI;i+=0.005){
+            vonalak[Math.round(i*200)].update(i);
+        }
     }else{
         vonal.update();
     }
     player.update();
-    angle+=0.01;
+    /*angle+=0.01;
     if(angle>TWO_PI){
         angle=0;
-    }
+    }*/
     if(someting.length>100){
         someting.splice(0,1);
     }
