@@ -1,11 +1,10 @@
 
 let vonalak=[];
-let angles=[];
 
 let obstacles = [];
 let player;
 //let angle=0;
-let manual=document.querySelector("#manual");
+let manual={checked:false};
 let circles=document.querySelector("#circles");
 let intersectoins=document.querySelector("#intersectoins");
 let randomColors=document.querySelector("#randomColors");
@@ -75,14 +74,10 @@ function draw(){
             point(p.x,p.y);
         }
     }
-
-    if(manual.checked){
-        for(let i = 0;i<TWO_PI;i+=0.005){
-            vonalak[Math.round(i*200)].update(i);
-        }
-    }else{
-        vonal.update();
+    for(let i = 0;i<TWO_PI;i+=0.005){
+        vonalak[Math.round(i*200)].update(i);
     }
+
     player.update();
     /*angle+=0.01;
     if(angle>TWO_PI){

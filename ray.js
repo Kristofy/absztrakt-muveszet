@@ -25,14 +25,8 @@ class Ray{
         }
     }
     update(angle){
-        if(angle){
-            this.dir.x=cos(angle);
-            this.dir.y=sin(angle);
-        }else{
-            let mouse=new Vec2(mouseX,mouseY);
-            this.dir=mouse.minus(this.center);
-            this.dir.normalize();
-        }
+        this.dir.x=cos(angle);
+        this.dir.y=sin(angle);
         let dir=Object.assign({},this.dir);    
         
         this.dir.mult(1000);

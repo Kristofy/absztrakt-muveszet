@@ -22,21 +22,3 @@ class Player{
     }
 
 }
-
-function keyPressed(){
-    switch(key){
-        case 'w': player.v.y-=5; break;
-        case 'a': player.v.x-=5; break;
-        case 's': player.v.y+=5; break;
-        case 'd': player.v.x+=5; break;
-    }
-}
-
-function keyReleased(){
-    switch(key){
-        case 'w': player.v.y+=5; break;
-        case 'a': player.v.x+=5; break;
-        case 's': player.v.y-=5; break;
-        case 'd': player.v.x-=5; break;
-    }
-}
