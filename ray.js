@@ -49,7 +49,7 @@ class Ray{
             fill(255,20);
         }
 
-        for(let i=0;i<15;i++){
+        for(let i=0;i<40;i++){
             let r = FindMaxToPoint(center);
             if(circles.checked){
                 ellipse(center.x,center.y,r*2);

@@ -86,4 +86,11 @@ function draw(){
 }
 
 
+function popup(){
+    if(document.querySelector('#popup').style.opacity==0){
+        document.querySelector('#popup').style.opacity=1;
+    }else{
+        document.querySelector('#popup').style.opacity=0;
+    }
+}
 

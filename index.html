@@ -14,6 +14,14 @@
             transform: translate(-50%, -50%);
 
         }
+        #popup{
+            opacity: 0;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -ms-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
     </style>
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
@@ -23,9 +31,16 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-4">
-                    <div class="div-spaceing">
-                        <button class="btn btn-info" onclick="reset()">Reset</button>
+                    <div class="mb-2">
+                        <button class="btn btn-secondary" onclick="reset()">Reset</button>
                     </div>
+                    <div>
+                        <button type="button" onclick="popup()" class="btn btn-info">tudnivalók</button>
+                        <div>
+                            <span class="w-100" id="popup">A <code>WASD</code> gombokkal mozgathatod a karakterd.<br/>A <code>títettség</code> és a <code>fényesség</code> csúszka csak a <code>random színek</code> bekapcsolásával elérhetők. </span>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-4">
                     <div class="custom-control custom-checkbox">
