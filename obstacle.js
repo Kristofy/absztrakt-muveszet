@@ -2,6 +2,7 @@ class Ellipse {
     constructor(pos, r){
         this.pos=pos;
         this.r=r;
+        this.color=random(100);
     }
 
     distance = function(p){
@@ -9,10 +10,12 @@ class Ellipse {
     }
 
     render = function(){
-        //rectMode(CENTER);
-        stroke(0,255,0);
-        noFill();
-        strokeWeight(1)
+        noStroke();
+        if(randomColors.checked){
+            fill(this.color,sat.value,bright.value);
+        }else{
+            fill(0);
+        }
         ellipse(this.pos.x, this.pos.y, this.r*2);
     }
 }
@@ -23,13 +26,19 @@ class Rect{
         this.pos=pos;
         this.w=w;
         this.h=h;
+        this.color=random(100);
     }
 
     render = function(){
-
-        stroke(255);
-        strokeWeight(1);
-        noFill();
+        noStroke();
+        if(randomColors.checked){
+            fill(this.color,sat.value,bright.value);
+        }else{
+            fill(0);
+        } 
+        //stroke(255);
+        //strokeWeight(1);
+       // noFill();
         rect(this.pos.x, this.pos.y, this.w, this.h);
     }
 

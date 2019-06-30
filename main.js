@@ -3,15 +3,23 @@ let vonal;
 
 let obstacles = [];
 let player;
-let playerV;
-let d=0;
+let angle=0;
+let manual=document.querySelector("#manual");
+let circles=document.querySelector("#circles");
+let intersectoins=document.querySelector("#intersectoins");
+let randomColors=document.querySelector("#randomColors");
+let sat=document.querySelector("#sat");
+let bright=document.querySelector("#bright");
 
-function setup(){
-    let C = createCanvas(800,400);
-    C.parent("#parent");
-    vonal = new Ray(new Vec2(width/2,height/2),new Vec2(width,height/2));
-    player=new Vec2(width/2,height/2);
-    playerV=new Vec2(0,0);
+let colorOfPoints;
+
+function reset(){
+    obstacles=[];
+    angle=0;
+    someting=[];
+    colorOfPoints=random(100);
+    player=new Player(width/2,height/2);
+    vonal = new Ray(player);
     for(let i=0;i<5;i++) {
         obstacles.push(new Ellipse(new Vec2(random(width),random(height)),random(15,60)));
     }
@@ -20,85 +28,62 @@ function setup(){
     }
 }
 
-function keyPressed(){
-    switch(key){
-        case 'w': playerV.y-=5; break;
-        case 'a': playerV.x-=5; break;
-        case 's': playerV.y+=5; break;
-        case 'd': playerV.x+=5; break;
+function setup(){
+    let C = createCanvas(800,400);
+    C.parent("#parent");
+    player=new Player(width/2,height/2);
+    vonal = new Ray(player);
+    colorOfPoints=random(100);
+    for(let i=0;i<5;i++) {
+        obstacles.push(new Ellipse(new Vec2(random(width),random(height)),random(15,60)));
+    }
+    for(let i=0;i<5;i++) {
+        obstacles.push(new Rect(new Vec2(random(width),random(height)),random(15,60),random(15,60)));
     }
 }
 
-function keyReleased(){
-    switch(key){
-        case 'w': playerV.y+=5; break;
-        case 'a': playerV.x+=5; break;
-        case 's': playerV.y-=5; break;
-        case 'd': playerV.x-=5; break;
-    }
-}
+
 
 function draw(){
-    d=1e10;
-    background(51);
-
-    //vonal.render();
-    stroke(255);
-    strokeWeight(8)
-    point(player.x, player.y);
-    
+    if(randomColors.checked){
+        colorMode(HSB, 100, 100, 100, 100);
+    }else{
+        colorMode(RGB);
+    }
+    background(70);
     for(let o of obstacles){
-       o.render();
-       let tmp= o.distance(player);
-       if(d>tmp){
-           d=tmp;
-       }
+        o.render();
     }
 
-    stroke(255);
-    fill(255,40);
-    ellipse(player.x,player.y,d*2);
-
-    player.add(playerV);
-}
-
-class Vec2{
-    constructor(x,y){
-        this.x=x;
-        this.y=y;
-    }
-    add(vec){
-        this.x+=vec.x;
-        this.y+=vec.y;
-    }
-    minus(vec){
-        this.x-=vec.x;
-        this.y-=vec.y;
-    }
-    abs(){
-        this.x=abs(this.x);
-        this.y=abs(this.y);
-    }
-    negative(){
-        if(this.x<0||this.y<0){
-            return true;
+    vonal.render()
+    player.render();;
+    
+    if(intersectoins.checked){
+        if(randomColors.checked){
+            stroke(colorOfPoints,sat.value,bright.value);
         }else{
-            return false;
+            stroke(255);
+        }
+        strokeWeight(2);
+        for(let p of someting){
+            point(p.x,p.y);
         }
     }
-    mag(){
-        return sqrt(this.x*this.x+this.y*this.y);
+
+    if(manual.checked){
+        vonal.update(angle);
+    }else{
+        vonal.update();
+    }
+    player.update();
+    angle+=0.01;
+    if(angle>TWO_PI){
+        angle=0;
+    }
+    if(someting.length>100){
+        someting.splice(0,1);
     }
 }
 
-class Ray{
-    constructor(a, b){
-        this.a = a;
-        this.b = b;
-    }
-    render(){
-        stroke(255)
-        line(this.a.x,this.a.y,this.b.x,this.b.y);
-    }
-}
+
 

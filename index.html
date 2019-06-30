@@ -7,16 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="node_modules/p5/lib/p5.min.js"></script>
     <style>
-        *{
-            margin:0;
-            padding:0;
-        }
-
-        body{
-            background: magenta;
-        }
-
-        #parent{
+        #center{
             position:absolute;
             top: 50%;
             left: 50%;
@@ -24,10 +15,55 @@
 
         }
     </style>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div id="parent"></div>
+    <div id="center">
+        <div id="parent"></div>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-4">
+                    <div class="div-spaceing">
+                        <button class="btn btn-info" onclick="reset()">Reset</button>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="manual">
+                        <label class="custom-control-label" for="manual">automatikus</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input id="circles" class="custom-control-input" type="checkbox"/>
+                        <label class="custom-control-label" for="circles">körök: </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input id="intersectoins" class="custom-control-input" type="checkbox"/>
+                        <label class="custom-control-label" for="intersectoins">találkozási pontok: </label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" id="randomColors" onclick="sat.disabled=!sat.disabled; bright.disabled=!bright.disabled" class="custom-control-input" type="checkbox"/>
+                        <label class="custom-control-label" for="randomColors">random színek: </label>
+                    </div>
+                    <div>
+                        <form class="form-group">
+                            <input id="sat" type="range" min="0" max="100" value="50" disabled>
+                            <label class="form-control-range" for="sat">telítettség:</label>
+                        </form>
+                        <form class="form-group">
+                            <input id="bright" type="range" min="0" max="100" value="50" disabled>
+                            <label class="form-control-range" for="bright">fényesség:</label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="obstacle.js"></script>
+    <script src="ray.js"></script>
+    <script src="vec.js"></script>
+    <script src="player.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
