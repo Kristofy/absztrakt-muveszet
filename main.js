@@ -93,4 +93,3 @@ function popup(){
         document.querySelector('#popup').style.opacity=0;
     }
 }
-
